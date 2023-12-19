@@ -26,15 +26,17 @@ describe('User can edit existing data', () => {
   //   cy.get('p').should('contain', 'User Deleted Successfully');
   // })
 
-  it('User can Edit data', () => {
+  it.only('User can Edit data', () => {
     cy.get(".table td").contains("user").parent().find("a").contains('Edit').click();
     cy.get(".section-title").should("contain", "Edit User");
     cy.get('#name').clear();
     cy.get('#name').type('user edited');
     cy.get('.btn-primary').click();
     cy.get(".table td").contains("user").should('have.text','user edited');
-    cy.get(".alert").should('be.visible');
-    cy.get('.alert').should('contain','User Berhasil Diupdate');
+    cy.get(".alert")
+      .should("be.visible")
+      .and("have.class", "alert-success")
+      .and("contain", "User Berhasil Diupdate")
   })
 
   //positive test case
